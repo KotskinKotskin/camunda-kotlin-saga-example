@@ -9,10 +9,12 @@ import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
+import org.springframework.transaction.annotation.EnableTransactionManagement
 import repository.AccountRepository
 
 @EnableProcessApplication
 @SpringBootApplication
+@EnableTransactionManagement
 @EnableJpaRepositories(basePackageClasses = arrayOf(AccountRepository::class))
 @EntityScan(basePackageClasses = arrayOf(Account::class))
 class SagaExampleApplication

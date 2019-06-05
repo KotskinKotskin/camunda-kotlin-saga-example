@@ -6,14 +6,16 @@ import org.camunda.bpm.engine.delegate.JavaDelegate
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Component
+import org.springframework.transaction.annotation.Transactional
 import repository.AccountRepository
 
 
 
-class ChangeBalanceDelegate(private val accountRepository : AccountRepository) : JavaDelegate {
+open class ChangeBalanceDelegate(private val accountRepository : AccountRepository) : JavaDelegate {
 
     private val logger = LoggerFactory.getLogger(ChangeBalanceDelegate::class.java)
 
+    @Transactional
     override fun execute(execution: DelegateExecution) {
         var accountId = execution.getVariable("accountId") as String
         var amount = execution.getVariable("amount") as Double
@@ -27,7 +29,7 @@ class ChangeBalanceDelegate(private val accountRepository : AccountRepository) :
         if (operation == "-") {
             account.balance = account.balance - amount
         }
-        accountRepository.save(account);
+        
 
         logger.info("Account $accountId, Operation $operation, Amount $amount")
 

@@ -20,14 +20,7 @@ class ErrorSimulatorDelegate(private val accountRepository : AccountRepository):
       }
       execution.setVariable("error", error)
 
-      var account1 = accountRepository.getOne(1)
-      var account2 = accountRepository.getOne(2)
 
-        if (account1.balance != account2.balance*(-1)) {
-            execution.setVariable("account1balance", account1.balance)
-            execution.setVariable("account2balance", account2.balance)
-            throw BpmnError("balanceError", "error in balance")
-        }
 
     }
 }
